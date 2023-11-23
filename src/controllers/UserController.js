@@ -4,8 +4,8 @@ import bcryptjs from "bcryptjs";
 export class UsersController {
   async createUser(req, res) {
     try {
-      const { name, email, password } = req.body;
-      if (!name || !email || !password) {
+      const { name, email, password, cpf, phone, birthDay, gender } = req.body;
+      if (!name || !email || !password || !cpf || !phone || !birthDay || !gender) {
         return res.status(401).json({
           message: ["Por favor, verifique os dados e tente novamente!"],
         });
@@ -24,12 +24,20 @@ export class UsersController {
           id: true,
           name: true,     
           email: true,
+          cpf: true,
+          phone: true,
+          birthDay: true,
+          gender: true,
           created_at: true,
           update_at: true,
         },
         data: {
           name,
           email,
+          cpf,
+          phone,
+          birthDay,
+          gender,
           password_hash: await bcryptjs.hash(password, 8),
         },
       });
@@ -52,6 +60,10 @@ export class UsersController {
           id: true,
           name: true,
           email: true,
+          cpf: true,
+          phone: true,
+          birthDay: true,
+          gender: true,
           created_at: true,
           update_at: true,
         },
@@ -73,6 +85,10 @@ export class UsersController {
           id: true,
           name: true,
           email: true,
+          cpf: true,
+          phone: true,
+          birthDay: true,
+          gender: true,
           created_at: true,
           update_at: true,
         },
@@ -87,12 +103,6 @@ export class UsersController {
     try {
       const { id } = req.params;
       const { name, email, password} = req.body;
-
-      if (!name || !profession || !email) {
-        return res.status(401).json({
-          message: "Por favor, verifique os dados e tente novamente",
-        });
-      }
 
       let user = prismaClient.user.findUnique({
         where: {
@@ -113,11 +123,19 @@ export class UsersController {
           name: true,
           email: true,
           created_at: true,
+          cpf: true,
+          phone: true,
+          birthDay: true,
+          gender: true,
           update_at: true,
         },
         data: {
           name,
           email,
+          cpf,
+          phone,
+          birthDay,
+          gender,
           password_hash: password
             ? await bcryptjs.hash(password, 8)
             : (
