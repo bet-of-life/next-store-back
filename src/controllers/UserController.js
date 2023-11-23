@@ -33,9 +33,6 @@ export class UsersController {
         data: {
           name,
           email,
-          cpf,
-          phone,
-          gender,
           password_hash: await bcryptjs.hash(password, 8),
         },
       });
