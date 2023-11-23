@@ -13,10 +13,11 @@ datasource db {
 model User{
   id            Int @id @default(autoincrement())
   name          String @default("")
-  profession    String @default("")
   email         String @unique @default("") 
   password_hash String? @default("")
-  permission    Boolean? @default(false)
+  cpf           String @default("")
+  phone         String @default("")
+  gender        String @default("")
   created_at    DateTime @default(now())
   update_at     DateTime @default(now())
   @@map("user")
