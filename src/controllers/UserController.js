@@ -4,8 +4,8 @@ import bcryptjs from "bcryptjs";
 export class UsersController {
   async createUser(req, res) {
     try {
-      const { name, email, password, cpf, phone, birthDay, gender } = req.body;
-      if (!name || !email || !password || !cpf || !phone || !birthDay || !gender) {
+      const { name, email, password, cpf, phone, gender } = req.body;
+      if (!name || !email || !password || !cpf || !phone || !gender) {
         return res.status(401).json({
           message: ["Por favor, verifique os dados e tente novamente!"],
         });
@@ -26,7 +26,6 @@ export class UsersController {
           email: true,
           cpf: true,
           phone: true,
-          birthDay: true,
           gender: true,
           created_at: true,
           update_at: true,
@@ -36,7 +35,6 @@ export class UsersController {
           email,
           cpf,
           phone,
-          birthDay,
           gender,
           password_hash: await bcryptjs.hash(password, 8),
         },
@@ -62,7 +60,6 @@ export class UsersController {
           email: true,
           cpf: true,
           phone: true,
-          birthDay: true,
           gender: true,
           created_at: true,
           update_at: true,
@@ -87,7 +84,6 @@ export class UsersController {
           email: true,
           cpf: true,
           phone: true,
-          birthDay: true,
           gender: true,
           created_at: true,
           update_at: true,
@@ -125,7 +121,6 @@ export class UsersController {
           created_at: true,
           cpf: true,
           phone: true,
-          birthDay: true,
           gender: true,
           update_at: true,
         },
@@ -134,7 +129,6 @@ export class UsersController {
           email,
           cpf,
           phone,
-          birthDay,
           gender,
           password_hash: password
             ? await bcryptjs.hash(password, 8)
