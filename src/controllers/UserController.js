@@ -4,8 +4,8 @@ import bcryptjs from "bcryptjs";
 export class UsersController {
   async createUser(req, res) {
     try {
-      const { name, profession, email, password, permission } = req.body;
-      if (!name || !profession || !email || !password) {
+      const { name, email, password } = req.body;
+      if (!name || !email || !password) {
         return res.status(401).json({
           message: ["Por favor, verifique os dados e tente novamente!"],
         });
@@ -22,18 +22,14 @@ export class UsersController {
       user = await prismaClient.user.create({
         select: {
           id: true,
-          name: true,
-          profession: true,
+          name: true,     
           email: true,
-          permission: true,
           created_at: true,
           update_at: true,
         },
         data: {
           name,
-          profession,
           email,
-          permission,
           password_hash: await bcryptjs.hash(password, 8),
         },
       });
@@ -55,40 +51,9 @@ export class UsersController {
         select: {
           id: true,
           name: true,
-          profession: true,
           email: true,
-
-          permission: true,
           created_at: true,
           update_at: true,
-          post: {
-            select: {
-              id: true,
-              comment: {
-                select: {
-                  id: true,
-                  content: true,
-                  created_at: true,
-                  user: {
-                    select: {
-                      name: true,
-                      id: true,
-                    },
-                  },
-                },
-              },
-              content: true,
-              created_at: true,
-              user: {
-                select: {
-                  id: true,
-                  profession: true,
-                  name: true,
-                  created_at: true,
-                },
-              },
-            },
-          },
         },
       });
       if (!user) {
@@ -107,37 +72,7 @@ export class UsersController {
         select: {
           id: true,
           name: true,
-          profession: true,
           email: true,
-          permission: true,
-          post: {
-            select: {
-              id: true,
-              comment: {
-                select: {
-                  id: true,
-                  content: true,
-                  created_at: true,
-                  user: {
-                    select: {
-                      name: true,
-                      id: true,
-                    },
-                  },
-                },
-              },
-              content: true,
-              created_at: true,
-              user: {
-                select: {
-                  id: true,
-                  profession: true,
-                  name: true,
-                  created_at: true,
-                },
-              },
-            },
-          },
           created_at: true,
           update_at: true,
         },
@@ -151,7 +86,7 @@ export class UsersController {
   async updateUser(req, res) {
     try {
       const { id } = req.params;
-      const { name, profession, email, password, permission } = req.body;
+      const { name, email, password} = req.body;
 
       if (!name || !profession || !email) {
         return res.status(401).json({
@@ -176,17 +111,13 @@ export class UsersController {
         select: {
           id: true,
           name: true,
-          profession: true,
           email: true,
-          permission: true,
           created_at: true,
           update_at: true,
         },
         data: {
           name,
-          profession,
           email,
-          permission,
           password_hash: password
             ? await bcryptjs.hash(password, 8)
             : (

@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { UsersController } from "../controllers/UserController.js";
 import loginRequired from "../middlewars/loginRequired.js";
-import adminRequired from "../middlewars/adminRequired.js";
 const userRoutes = Router();
 const usersController = new UsersController();
 
