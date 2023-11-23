@@ -24,10 +24,10 @@ export class TokenController {
     if (!(await passwordIsValid(password))) {
       return res.status(401).json({ error: "Senha inválida!" });
     }
-    const { id, name, profession, permission } = user;
+    const { id, name, cpf, phone, gender, created_at, updated_at } = user;
 
     const token = jwt.sign(
-      { id, name, profession, email, permission },
+      { id, name, email, cpf, phone, gender, created_at, updated_at },
       process.env.TOKEN_SECRET,
       {
         expiresIn: process.env.TOKEN_EXPIRATION,
