@@ -15,7 +15,9 @@ export class TokenController {
       },
     });
     if (!user) {
-      return res.json({ error: "Usuário não encontrado!" });
+      return res.status(500).json({
+        error: ["Usuário não encontrado!"],
+      });
     }
 
     const passwordIsValid = (password) => {
