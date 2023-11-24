@@ -4,8 +4,8 @@ import bcryptjs from "bcryptjs";
 export class UsersController {
   async createUser(req, res) {
     try {
-      const { name, email, password, cpf, phone, gender } = req.body;
-      if (!name || !email || !password || !cpf || !phone || !gender) {
+      const { name, email, password, cpf, phone } = req.body;
+      if (!name || !email || !password || !cpf || !phone) {
         return res.status(401).json({
           message: ["Por favor, verifique os dados e tente novamente!"],
         });
@@ -22,7 +22,7 @@ export class UsersController {
       user = await prismaClient.user.create({
         select: {
           id: true,
-          name: true,     
+          name: true,
           email: true,
           created_at: true,
           update_at: true,
@@ -54,7 +54,6 @@ export class UsersController {
           email: true,
           cpf: true,
           phone: true,
-          gender: true,
           created_at: true,
           update_at: true,
         },
@@ -78,7 +77,6 @@ export class UsersController {
           email: true,
           cpf: true,
           phone: true,
-          gender: true,
           created_at: true,
           update_at: true,
         },
@@ -92,7 +90,7 @@ export class UsersController {
   async updateUser(req, res) {
     try {
       const { id } = req.params;
-      const { name, email, password} = req.body;
+      const { name, email, password } = req.body;
 
       let user = prismaClient.user.findUnique({
         where: {
@@ -115,7 +113,7 @@ export class UsersController {
           created_at: true,
           cpf: true,
           phone: true,
-          gender: true,
+
           update_at: true,
         },
         data: {
@@ -123,7 +121,7 @@ export class UsersController {
           email,
           cpf,
           phone,
-          gender,
+
           password_hash: password
             ? await bcryptjs.hash(password, 8)
             : (
