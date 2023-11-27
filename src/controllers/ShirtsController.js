@@ -5,22 +5,22 @@ import bcryptjs from "bcryptjs";
 export class ShirtsController {
     async createShirts(req, res) {
         try {
-          const {  src, srcHover, name, price, oldPrice } = req.body;
+          const { id,  src, srcHover, name, price, oldPrice } = req.body;
           if ( !src || !srcHover || !name || !price || !oldPrice) {
             return res.status(401).json({
               message: ["Por favor, verifique os dados e tente novamente!"],
             });
           }
-          let shirts = await prismaClient.shirts.findUnique({
-            where: {
-              email,
-            },
-          });
-          if (shirts) {
-            return res.json({ message: "Camisa já cadastrada" });
-          }
-    
-          shirts = await prismaClient.shirts.create({
+          // let shirts = await prismaClient.shirts.findUnique({
+          //   where: {
+          //     id,
+          //   },
+          // });
+          // if (shirts) {
+          //   return res.json({ message: "Camisa já cadastrada" });
+          // }
+
+        let shirts = await prismaClient.shirts.create({
             select: {
               id: true,
               src: true,
