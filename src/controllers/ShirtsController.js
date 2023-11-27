@@ -5,8 +5,8 @@ import bcryptjs from "bcryptjs";
 export class ShirtsController {
     async createShirts(req, res) {
         try {
-          const { id, src, srcHover, name, price, oldPrice } = req.body;
-          if (!id || !src || !srcHover || !name || !price || !oldPrice) {
+          const {  src, srcHover, name, price, oldPrice } = req.body;
+          if ( !src || !srcHover || !name || !price || !oldPrice) {
             return res.status(401).json({
               message: ["Por favor, verifique os dados e tente novamente!"],
             });
