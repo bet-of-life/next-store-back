@@ -6,7 +6,7 @@ export class TokenController {
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(401).json({
-        errors: ["Credencias inválidas!"],
+        error: "Credencias inválidas!",
       });
     }
     const user = await prismaClient.user.findUnique({
@@ -16,7 +16,7 @@ export class TokenController {
     });
     if (!user) {
       return res.status(500).json({
-        error: ["Usuário não encontrado!"],
+        error: "Usuário não encontrado!",
       });
     }
 
