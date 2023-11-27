@@ -51,7 +51,7 @@ export class ShirtsController {
       async findShirt(req, res) {
         try {
           const { id } = req.params;
-          const shirt = await prismaClient.shirt.findUnique({
+          const shirt = await prismaClient.shirts.findUnique({
             where: {
               id: Number(id),
             },
@@ -78,7 +78,7 @@ export class ShirtsController {
 
       async findAllShirts(req, res) {
         try {
-          const shirts = await prismaClient.shirt.findMany({
+          const shirts = await prismaClient.shirts.findMany({
             select: {
                 id: true,
                 src: true,
@@ -101,7 +101,7 @@ export class ShirtsController {
           const { id } = req.params;
           const { src, srcHover, name, price, oldPrice } = req.body;
     
-          let shirt = prismaClient.shirt.findUnique({
+          let shirt = prismaClient.shirts.findUnique({
             where: {
               id: Number(id),
             },
@@ -111,7 +111,7 @@ export class ShirtsController {
             return res.status(404).json({ message: "Camisa não encontrada!" });
           }
     
-          shirt = await prismaClient.shirt.update({
+          shirt = await prismaClient.shirts.update({
             where: {
               id: Number(id),
             },
@@ -145,7 +145,7 @@ export class ShirtsController {
       async deleteShirt(req, res) {
         try {
           const { id } = req.params;
-          const shirt = await prismaClient.shirt.findUnique({
+          const shirt = await prismaClient.shirts.findUnique({
             where: {
               id: Number(id),
             },
@@ -154,7 +154,7 @@ export class ShirtsController {
             return res.status(404).json({ message: "Camisa não encontrada!" });
           }
     
-          await prismaClient.shirt.delete({
+          await prismaClient.shirts.delete({
             where: {
               id: Number(id),
             },
