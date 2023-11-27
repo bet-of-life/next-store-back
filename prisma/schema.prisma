@@ -23,3 +23,15 @@ model User{
   @@map("user")
 }
 
+model Shirts{
+  id            Int @id @default(autoincrement())
+  src           String @default("")
+  srcHover      String @default("")
+  name String?  @default("")
+  price         String @default("")
+  oldPrice      String @default("")
+  created_at    DateTime @default(now())
+  update_at     DateTime @default(now())
+  @@map("shirts")
+}
+
