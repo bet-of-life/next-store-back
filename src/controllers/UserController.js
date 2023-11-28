@@ -16,7 +16,7 @@ export class UsersController {
         },
       });
       if (user) {
-        return res.json({ message: "Usuário já cadastrado" });
+        return  res.status(401).json({ message: "Usuário já cadastrado" });;
       }
 
       user = await prismaClient.user.create({

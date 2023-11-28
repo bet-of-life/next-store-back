@@ -99,7 +99,7 @@ export class ShirtsController {
     async updateShirt(req, res) {
         try {
           const { id } = req.params;
-          const { src, srcHover, name, price, oldPrice } = req.body;
+          const { src, srcHover, name, price, oldPrice, srcDetail1, srcDetail2, srcDetail3, srcDetail4 } = req.body;
     
           let shirt = prismaClient.shirts.findUnique({
             where: {
@@ -122,6 +122,10 @@ export class ShirtsController {
                 name: true,
                 price: true, 
                 oldPrice: true,
+                srcDetail1: true,
+                srcDetail2: true,
+                srcDetail3: true,
+                srcDetail4: true,
                 created_at: true,
                 update_at: true,
               },
@@ -131,7 +135,11 @@ export class ShirtsController {
                 srcHover,
                 name,
                 price,
-                oldPrice
+                oldPrice,
+                srcDetail1,
+                srcDetail2,
+                srcDetail3,
+                srcDetail4,
               },
           });
           return res
