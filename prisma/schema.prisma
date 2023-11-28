@@ -28,6 +28,10 @@ model Shirts {
   name       String?  @default("")
   price      String   @default("")
   oldPrice   String   @default("")
+  srcDetail1  String?   @default("")
+  srcDetail2 String?   @default("")
+  srcDetail3 String?   @default("")
+  srcDetail4 String?   @default("")
   created_at DateTime @default(now())
   update_at  DateTime @default(now())
 
